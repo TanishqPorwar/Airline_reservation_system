@@ -21,7 +21,7 @@ public class sys {
                     bookTicket(sc, flights);
                     break;
                 case 2:
-
+                    cancelTicket(sc);
                     break;
                 case 3:
 
@@ -43,6 +43,11 @@ public class sys {
         } while (choice != 6);
 
         sc.close();
+    }
+
+    private static void cancelTicket(Scanner sc) throws IOException, InterruptedException {
+        clearScreen();
+
     }
 
     private static void bookTicket(Scanner sc, ArrayList<Flight> flights) throws IOException, InterruptedException {
@@ -82,6 +87,7 @@ public class sys {
         System.out.println("You have selected: ");
         flight.getDetails();
         int ch;
+        flag = 1;
         String seat = "";
         String type = "";
         int baggageLimit = 0;
@@ -91,6 +97,7 @@ public class sys {
                 case 1:
                     if ((flight.getESize() - flight.count.get("eco")) <= 0) {
                         System.out.println("Sorry no seats available");
+                        flag = 0;
                     } else {
                         flight.count.put("eco", flight.count.get("eco") + 1);
                         seat = flight.row + getSeatFromcol(flight, "eco");
@@ -103,6 +110,7 @@ public class sys {
                 case 2:
                     if ((flight.getBSize() - flight.count.get("bus")) <= 0) {
                         System.out.println("Sorry no seats available");
+                        flag = 0;
                     } else {
                         flight.count.put("bus", flight.count.get("bus") + 1);
                         seat = flight.bRow + getSeatFromcol(flight, "bus");
@@ -114,6 +122,7 @@ public class sys {
                 case 3:
                     if ((flight.getFSize() - flight.count.get("fir")) <= 0) {
                         System.out.println("Sorry no seats available");
+                        flag = 0;
                     } else {
                         flight.count.put("fir", flight.count.get("fir") + 1);
                         seat = flight.fRow + getSeatFromcol(flight, "fir");
@@ -127,8 +136,27 @@ public class sys {
                     break;
             }
         } while (ch != 4);
-        // System.out.println(seat + "--" + type);
-
+        if (flag == 0)
+            return;
+        System.out.println(ConsoleColors.YELLOW + "Thank you for choosing AIR ASIA. Please Enter your details"
+                + ConsoleColors.RESET);
+        System.out.print(ConsoleColors.YELLOW + "Enter First Name: " + ConsoleColors.RESET);
+        String fname = sc.next();
+        System.out.print(ConsoleColors.YELLOW + "Enter Last Name: " + ConsoleColors.RESET);
+        String lname = sc.next();
+        System.out.print(ConsoleColors.YELLOW + "Enter Sex(M/F): " + ConsoleColors.RESET);
+        String sex = sc.next();
+        System.out.print(ConsoleColors.YELLOW + "Enter Age: " + ConsoleColors.RESET);
+        int age = sc.nextInt();
+        Passenger p = new Passenger(fname, lname, sex, age);
+        p.setSeatNumber(seat);
+        p.setSeatType(type);
+        p.setBaggeLimit(baggageLimit);
+        p.setFlight(flight);
+        String pnr = flight.getPNR();
+        p.setPnr(pnr);
+        p.getSummary();
+        flight.reservations.put(pnr, p);
     }
 
     private static String getSeatFromcol(Flight flight, String st) {

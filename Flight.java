@@ -8,7 +8,7 @@ public class Flight {
     // Data Members
 
     // unique id for each flight
-    private String id;
+    private final String id;
 
     public static String stops[] = { "AUS", "IND", "ITA", "USA" };
     // total number of seats
@@ -26,9 +26,7 @@ public class Flight {
 
     private ArrayList<String> pnrList;
 
-    public HashMap<String, Passenger> eReservations;
-    public HashMap<String, Passenger> bReservations;
-    public HashMap<String, Passenger> fReservations;
+    public HashMap<String, Passenger> reservations;
 
     public HashMap<String, Integer> count;
 
@@ -48,9 +46,7 @@ public class Flight {
 
         this.fSize = fSize;
 
-        this.eReservations = new HashMap<String, Passenger>();
-        this.bReservations = new HashMap<String, Passenger>();
-        this.fReservations = new HashMap<String, Passenger>();
+        this.reservations = new HashMap<String, Passenger>();
 
         this.count = new HashMap<String, Integer>();
         this.count.put("eco", 0);
@@ -97,11 +93,15 @@ public class Flight {
         return to;
     }
 
-    // SETTERS
-    public void setId(String i) {
-        id = i;
+    public String getPNR() {
+        String temp;
+        do {
+            temp = PNR.generate();
+        } while (reservations.get(temp) != null);
+        return temp;
     }
 
+    // SETTERS
     public void setESize(int s) {
         eSize = s;
     }
