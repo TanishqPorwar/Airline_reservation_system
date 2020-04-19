@@ -1,15 +1,25 @@
 /**
- * Passenger
+ * Passenger Class
  */
 public class Passenger {
+
+    // Data members
+
+    // fisrt and last name, age and sex of the passenger
     String firstName;
     String lastName;
     String sex;
     int age;
+
+    // the flight the passenger is travelling in
     Flight flight;
+    // seat number eg. 2c
     String seatNum;
+    // seat type: eco, business or first class
     String seatType;
+    // baggageLimit
     int baggageLimit;
+    // pnr of the passanger
     String pnr;
 
     Passenger(String f, String l, String s, int a) {
@@ -50,9 +60,9 @@ public class Passenger {
         System.out.println("               Flight:" + flight.getId());
         System.out.println("+---------------------------------------------+");
         System.out.println("               " + flight.getFrom() + "-->" + flight.getTo());
-        System.out.println(" PNR:" + pnr + "\t\tType:" + seatType);
-        System.out.println(" Name" + firstName + " " + lastName + "\tAge:" + age);
-        System.out.println(" Sex:" + sex + "\t\t\tSeat:" + seatNum);
+        System.out.println(" PNR: " + pnr + "\t\tType: " + seatType);
+        System.out.println(" Name: " + firstName + " " + lastName + "\t\t\tAge: " + age);
+        System.out.println(" Sex: " + sex + "\t\t\tSeat: " + seatNum);
         System.out.println("+---------------------------------------------+");
         System.out.println(ConsoleColors.RESET);
     }

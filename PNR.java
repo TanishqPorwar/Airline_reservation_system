@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * PNR Class, it generates a unique PNR
+ */
+
 public class PNR {
 
     static String generate() {

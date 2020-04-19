@@ -7,10 +7,15 @@ public class Flight {
 
     // Data Members
 
+    // all the stops that the airline connects
+    public static String stops[] = { "AUS", "IND", "ITA", "USA" };
+
+    // map PNR to Passenger.
+    public static HashMap<String, Passenger> reservations = new HashMap<String, Passenger>();
+
     // unique id for each flight
     private final String id;
 
-    public static String stops[] = { "AUS", "IND", "ITA", "USA" };
     // total number of seats
     private int eSize;
     private int bSize;
@@ -24,10 +29,7 @@ public class Flight {
     // end point of flight
     private String to;
 
-    private ArrayList<String> pnrList;
-
-    public HashMap<String, Passenger> reservations;
-
+    // keep a count of occupied seats for each type of seat
     public HashMap<String, Integer> count;
 
     // constructor
@@ -46,8 +48,6 @@ public class Flight {
 
         this.fSize = fSize;
 
-        this.reservations = new HashMap<String, Passenger>();
-
         this.count = new HashMap<String, Integer>();
         this.count.put("eco", 0);
         this.count.put("bus", 0);
@@ -65,8 +65,8 @@ public class Flight {
         System.out.println(from + "-->" + to);
         System.out.println("Seats available:");
         System.out.println("Economy :" + (eSize - count.get("eco")));
-        System.out.println("Business :" + (eSize - count.get("bus")));
-        System.out.println("First-Class :" + (eSize - count.get("fir")));
+        System.out.println("Business :" + (bSize - count.get("bus")));
+        System.out.println("First-Class :" + (fSize - count.get("fir")));
     }
 
     public String getId() {
